@@ -9,7 +9,7 @@
 ## Entity Relationship Diagram
 
 <p align="center">
-<img src="/previews/entity_relationship_diagram.png"/>
+<img src="/previews/swipa_erd.png"/>
 </p>
 
 </br>
@@ -30,7 +30,7 @@ For Windows system, `make` can be installed using 3 ways:
 - Clone repository
 
     ```
-    git clone git@github.com:ariessa-deriv/syntrade-backend.git
+    git clone git@github.com:ariessa/swipa-backend.git
     ```
 
 - Create `.env` file and insert values
@@ -40,7 +40,7 @@ For Windows system, `make` can be installed using 3 ways:
     POSTGRES_HOST=""
     POSTGRES_PORT=""
     POSTGRES_DATABASE=""
-    POSTGRES_USER=""
+    POSTGRES_USER="postgres"
     POSTGRES_PASSWORD=""
     FRONTEND_DEV_URL=""
     ```
@@ -58,21 +58,21 @@ For Windows system, `make` can be installed using 3 ways:
 - Get a list of unit tests and their verbose results
 
     ```
-    make test
+    make tests
     ```
 
     <p align="center">
-    <img src=""/>
+    <img src="/previews/verbose-test.png"/>
     </p>
 
 - Get test coverage
 
     ```
-    npm run test-coverage
+    make tests-coverage
     ```
 
     <p align="center">
-    <img src=""/>
+    <img src="/previews/test-coverage.png"/>
     </p>
 
 <br />
