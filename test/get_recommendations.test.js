@@ -84,9 +84,24 @@ describe("function get_recommendations", () => {
         let university = user_profile.rows[0].university;
         let interest = sanitiseInterests(user_profile.rows[0].interests);
 
-        let num_potential_matches = (await get_recommendations([name, gender, location, university, interest])).length;
+        expect((await get_recommendations([name, gender, location, university, interest])).length).toBeLessThanOrEqual(10);
 
-        expect(num_potential_matches).toBeLessThanOrEqual(10);
+        // Delete 40 user profiles from db
+        await client.query(
+            `DELETE FROM users
+              WHERE id IN (
+             SELECT id
+               FROM users
+              WHERE gender != $1
+              LIMIT 41);`,
+            [gender]
+        );
+
+        expect((await get_recommendations([name, gender, location, university, interest])).length).toBeLessThanOrEqual(10);
+    });
+
+    test("Can pass valid name, gender, location, university, and interests", async () => {
+        await expect(get_recommendations([valid_name, valid_gender, valid_location, valid_university, valid_interests])).resolves.not.toThrow();
     });
 
     test("Cannot pass invalid name", async () => {
