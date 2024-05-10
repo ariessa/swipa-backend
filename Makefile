@@ -4,8 +4,8 @@ up:
 down:
 	./scripts/down.sh
 
-test:
+tests:
 	docker exec -it swipa-backend sh -c "npm run test"
 
-test-coverage:
+tests-coverage:
 	docker exec -it swipa-backend sh -c "npm run test-coverage"
