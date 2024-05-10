@@ -1,0 +1,17 @@
+# Ignore .env files
+*.env
+
+# Ignore node_modules
+node_modules/
+
+# Ignore postgres folder
+postgres/
+
+# Ignore package-lock.json
+package-lock.json
+
+# Ignore DS_Store
+**/.DS_Store
+
+# Ignore test coverage
+coverage/

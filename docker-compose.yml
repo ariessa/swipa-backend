@@ -1,0 +1,43 @@
+version: "3.8"
+
+services:
+  app:
+    container_name: swipa-backend
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: swipa-backend
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_started
+    ports:
+      - "4000:4000"
+    env_file:
+      - .env
+    volumes:
+      - ".:/usr/src/app"
+    command: npm run start
+  postgres:
+    container_name: swipa-database
+    image: postgres:10.3
+    restart: always
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+
+volumes:
+  postgres:
+
+networks:
+  default:
+    name: swipa-network
+    driver: bridge
+    external: true
